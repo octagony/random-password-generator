@@ -3,8 +3,8 @@ const generator = require("generate-password");
 
 const Main = () => {
   const [password, setPassword] = useState("");
-  
-  const [passwordLength,setPasswordLength] = useState(2);
+
+  const [passwordLength, setPasswordLength] = useState(2);
 
   const [initialState, setInitialState] = useState({
     length: 10,
@@ -14,15 +14,8 @@ const Main = () => {
     uppercase: false,
   });
 
-  const handlePasswordLenght = (event) =>{
-    setPasswordLength(event.target.value)
-    setInitialState({
-      ...initialState,
-      [event.target.name]: event.target.value
-    })
-  }
-
-  const updateInputs = (event) => {
+  const handlePasswordLenght = (event) => {
+    setPasswordLength(event.target.value);
     setInitialState({
       ...initialState,
       [event.target.name]: event.target.value,
@@ -34,22 +27,23 @@ const Main = () => {
       ...initialState,
       [event.target.name]: event.target.checked,
     });
-
   };
 
   const handleGeneratePassword = (event) => {
     event.preventDefault();
-
-
 
     setInitialState({
       ...initialState,
       length: parseInt(initialState.length),
     });
 
-
     const password = generator.generate(initialState);
     setPassword(password);
+  };
+
+  const handleCopyToClipboard = (event) => {
+    event.preventDefault();
+    navigator.clipboard.writeText(password);
   };
 
   return (
@@ -63,17 +57,23 @@ const Main = () => {
           <div>
             <span>Your password: </span>
             <p>{password}</p>
+            <button
+              className="p-2 cursor-pointer"
+              onClick={handleCopyToClipboard}
+            >
+              Copy to Clipboard
+            </button>
           </div>
           <div>
             <span>Password Length:</span>
-             <input
+            <input
               type="range"
               name="length"
               onChange={handlePasswordLenght}
-              min='2'
-              max='100'
+              min="2"
+              max="100"
               value={passwordLength}
-            /> 
+            />
             <span>{passwordLength}</span>
           </div>
           <div>
