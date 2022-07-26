@@ -10,8 +10,7 @@ export default function Home() {
         <meta name="description" content="Easy/Pass for your passwords" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
-      <Main/>
+      <Main />
     </>
   );
 }

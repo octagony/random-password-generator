@@ -31,7 +31,6 @@ const Main = () => {
 
   const handleGeneratePassword = (event) => {
     event.preventDefault();
-
     setInitialState({
       ...initialState,
       length: parseInt(initialState.length),
