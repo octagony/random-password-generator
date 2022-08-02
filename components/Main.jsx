@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { v4 as randomId } from "uuid";
 const generator = require("generate-password");
 
 const Main = () => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState({
+    id: randomId(),
+    value: "",
+  });
 
   const [passwordLength, setPasswordLength] = useState(2);
 
@@ -37,13 +41,18 @@ const Main = () => {
     });
 
     const password = generator.generate(initialState);
-    setPassword(password);
+    setPassword({
+      id: randomId(),
+      value: password,
+    });
   };
 
   const handleCopyToClipboard = (event) => {
     event.preventDefault();
-    navigator.clipboard.writeText(password);
+    navigator.clipboard.writeText(password.value);
   };
+
+  console.log(password);
 
   return (
     <div className="text-center">
@@ -55,7 +64,7 @@ const Main = () => {
         >
           <div>
             <span>Your password: </span>
-            <p>{password}</p>
+            <p>{password.value}</p>
             <button
               className="p-2 cursor-pointer"
               onClick={handleCopyToClipboard}
