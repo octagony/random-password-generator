@@ -3,10 +3,12 @@ import Link from "next/link";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import { login } from "../context/AuthContext";
 
 const Signin = () => {
   const router = useRouter();
-  const { user, login } = useAuth();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -18,16 +20,16 @@ const Signin = () => {
       await login(data.email, data.password);
       router.push("/account");
     } catch (error) {
+      setError(error.message);
       console.log(error.message);
     }
-
-    console.log(data);
   };
 
   return (
     <div>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
         <h1 className="text-3xl font-bold">Sign In</h1>
+        {error ? <p className="bg-red-300 p-3 my-2">{error}</p> : null}
         <form onSubmit={handleLogin}>
           <div className="my-4">
             <label>Email</label>

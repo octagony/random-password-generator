@@ -1,11 +1,20 @@
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import SavedPasswords from "../components/SavedPasswords";
+import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
+import SavedPasswords from "../components/SavedPasswords";
 
 const Account = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await logout();
+      router.push("/signin");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     if (!user) {
@@ -19,11 +28,14 @@ const Account = () => {
         <div>
           <h1 className="text-2xl font-bold"> Account </h1>
           <div>
-            <p>Welcome, User</p>
+            <p>Welcome, {user?.email}</p>
           </div>
         </div>
         <div>
-          <button className="border px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl">
+          <button
+            className="border px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl"
+            onClick={handleSignOut}
+          >
             Sign Out
           </button>
         </div>

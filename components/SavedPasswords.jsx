@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { useAuth } from "../context/AuthContext";
 
 const SavedPasswords = () => {
   const [passwords, setPasswords] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    setPasswords([
-      {
-        id: 123,
-        name: "Bitwarden",
-        value: "asdasd",
-      },
-    ]);
-  }, []);
+    onSnapshot(doc(db, "users", `${user.email}`), (doc) => {
+      setPasswords(doc.data()?.watchList);
+    });
+  }, [user.email]);
+
+  const passwordsPath = doc(db, "users", `${user.email}`);
+  const deletePassword = async (passedId) => {
+    try {
+      const result = passwords.filter((password) => {
+        return password.id !== passedId;
+      });
+      await updateDoc(passwordsPath, {
+        watchList: result,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div>
       {!passwords.length ? (
@@ -28,11 +43,14 @@ const SavedPasswords = () => {
           </thead>
           <tbody>
             {passwords.map((password) => (
-              <tr key={password.id} className='h-[60px] overflow-hidden'>
+              <tr key={password.id} className="h-[60px] overflow-hidden">
                 <td>{password?.name}</td>
                 <td>{password?.value}</td>
-                <td >
-                  <AiOutlineClose className="cursor-pointer mx-auto" />
+                <td>
+                  <AiOutlineClose
+                    className="cursor-pointer mx-auto"
+                    onClick={() => deletePassword(password.id)}
+                  />
                 </td>
               </tr>
             ))}

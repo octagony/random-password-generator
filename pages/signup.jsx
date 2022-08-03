@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
   const { user, signup } = useAuth();
+  const [error, setError] = useState('');
   console.log(user);
   const [data, setData] = useState({
     email: "",
@@ -13,19 +14,20 @@ const Signup = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    setError('');
     try {
       await signup(data.email, data.password);
     } catch(error) {
-      console.log(error.message);
+      setError(error.message);
+      console.log(error.message)
     }
-
-    console.log(data);
   };
 
   return (
     <div>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
         <h1 className="text-3xl font-bold">Sign Up</h1>
+        {error ? <p className="bg-red-300 p-3 my-2">{error}</p> : null}
         <form onSubmit={handleSignUp}>
           <div className="my-4">
             <label>Email</label>

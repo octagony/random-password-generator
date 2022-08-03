@@ -5,7 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext({});
 
@@ -34,7 +35,10 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   const signup = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    createUserWithEmailAndPassword(auth, email, password);
+    return setDoc(doc(db, "users", email), {
+      watchList: [],
+    });
   };
 
   const login = (email, password) => {
