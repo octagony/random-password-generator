@@ -1,12 +1,23 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import SavedPasswords from "../components/SavedPasswords";
+import { useAuth } from "../context/AuthContext";
 
 const Account = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [router, user]);
+
   return (
     <div className="max-w-[1140px] mx-auto">
       <div className="flex justify-between items-center my-12 py-8 px-4">
         <div>
-          <h1 className="text-2xl font-bold">Account</h1>
+          <h1 className="text-2xl font-bold"> Account </h1>
           <div>
             <p>Welcome, User</p>
           </div>
