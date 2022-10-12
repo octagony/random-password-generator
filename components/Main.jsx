@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import Generator from "./Generator.jsx"
+import Modal from "./Modal.jsx"
 const generator = require("generate-password");
 
 const Main = () => {
@@ -54,12 +55,6 @@ const Main = () => {
     });
   };
 
-  const updateCheckboxes = (event) => {
-    setInitialState({
-      ...initialState,
-      [event.target.name]: event.target.checked,
-    });
-  };
 
   const handleGeneratePassword = (event) => {
     event.preventDefault();
@@ -82,113 +77,13 @@ const Main = () => {
   };
 
   return (
-    <div className="text-center">
+    <div className="rounded grid text-center my-5 font-bold">
       <h2>Let&apos;s create a password for you!</h2>
       <div>
-        <form
-          onSubmit={handleGeneratePassword}
-          className="p-4 border-2 border-amber-400"
-        >
-          <div>
-            <span>Your password: </span>
-            <p>{password.value}</p>
-            {actionButtons ? (
-              <div>
-                <button
-                  className="p-2 cursor-pointer"
-                  onClick={handleCopyToClipboard}
-                >
-                  Copy to Clipboard
-                </button>
-                <button
-                  className="p-2 cursor-pointer"
-                  onClick={() => setModalSave(true)}
-                >
-                  Save Password
-                </button>
-              </div>
-            ) : null}
-          </div>
-          <div>
-            <span>Password Length:</span>
-            <input
-              type="range"
-              name="length"
-              onChange={handlePasswordLenght}
-              min="2"
-              max="100"
-              value={passwordLength}
-            />
-            <span>{passwordLength}</span>
-          </div>
-          <div>
-            <span>Include numbers:</span>
-            <input type="checkbox" name="numbers" onChange={updateCheckboxes} />
-          </div>
-          <div>
-            <span>Include symbols:</span>
-            <input type="checkbox" name="symbols" onChange={updateCheckboxes} />
-          </div>
-          <div>
-            <span>Include uppercase:</span>
-            <input
-              type="checkbox"
-              name="uppercase"
-              onChange={updateCheckboxes}
-            />
-          </div>
-          <div>
-            <input
-              className="p-2 bg-slate-500 cursor-pointer"
-              type="submit"
-              value="Generate password"
-            />
-          </div>
-        </form>
+      <Generator initialStatei={initialState} setInitialState={setInitialState} handleGeneratePassword={handleGeneratePassword} password={password} actionButtons={actionButtons} handlePasswordLenght = {handlePasswordLenght} passwordLength = {passwordLength} handleCopyToClipboard = {handleCopyToClipboard} setModalSave = {setModalSave}/>
       </div>
       {modalSave ? (
-        <div className="absolute w-screen h-screen bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="w-96 h-96 p-2 bg-white rounded-xl">
-              <div className="">
-                <p>Save your password</p>
-                <span
-                  className="cursor-pointer absolute top-2 right-2"
-                  onClick={() => setModalSave(false)}
-                >
-                  <AiOutlineClose size={20} />
-                </span>
-              </div>
-              <form onSubmit={savePassword}>
-                <div>
-                  <p>Set label</p>
-                  <input
-                    type="text"
-                    onChange={(event) =>
-                      setPassword({ ...password, name: event.target.value })
-                    }
-                    value={password.name}
-                  />
-                </div>
-                <div>
-                  <p>Configure password</p>
-                  <input
-                    type="text"
-                    onChange={(event) =>
-                      setPassword({ ...password, value: event.target.value })
-                    }
-                    value={password.value}
-                  />
-                </div>
-                <input
-                  className="p-4 border border-cyan-900 cursor-pointer"
-                  type="submit"
-                  value="Save password"
-                ></input>
-              </form>
-            </div>
-          </div>
-        </div>
+        <Modal savePassword={savePassword} password={password} setModalSave={setModalSave}/>
       ) : null}
     </div>
   );

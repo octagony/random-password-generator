@@ -13,6 +13,7 @@ import  ThemeToggle from "./ThemeToggle";
  * 2. Create routers for account page
  * 3. Setup a dynamic buttons for account and logout
  */
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
 
