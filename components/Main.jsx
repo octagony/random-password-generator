@@ -47,7 +47,14 @@ const Main = () => {
     }
   };
 
-  const handlePasswordLenght = (event) => {
+  const updateCheckboxes = (event) =>{
+    setInitialState({
+      ...initialState,
+      [event.target.name]:event.target.checked
+    })
+  }
+
+  const handlePasswordLength = (event) => {
     setPasswordLength(event.target.value);
     setInitialState({
       ...initialState,
@@ -78,12 +85,12 @@ const Main = () => {
 
   return (
     <div className="rounded grid text-center my-5 font-bold">
-      <h2>Let&apos;s create a password for you!</h2>
+      <h1 className = 'text-xl mb-2 '>Let&apos;s create a password for you!</h1>
       <div>
-      <Generator initialStatei={initialState} setInitialState={setInitialState} handleGeneratePassword={handleGeneratePassword} password={password} actionButtons={actionButtons} handlePasswordLenght = {handlePasswordLenght} passwordLength = {passwordLength} handleCopyToClipboard = {handleCopyToClipboard} setModalSave = {setModalSave}/>
+      <Generator initialStatei={initialState} setInitialState={setInitialState} handleGeneratePassword={handleGeneratePassword} password={password} actionButtons={actionButtons} handlePasswordLength = {handlePasswordLength} passwordLength = {passwordLength} updateCheckboxes = {updateCheckboxes} handleCopyToClipboard = {handleCopyToClipboard} setModalSave = {setModalSave}/>
       </div>
       {modalSave ? (
-        <Modal savePassword={savePassword} password={password} setModalSave={setModalSave}/>
+        <Modal savePassword={savePassword} password={password} setModalSave={setModalSave} setPassword = {setPassword}/>
       ) : null}
     </div>
   );
