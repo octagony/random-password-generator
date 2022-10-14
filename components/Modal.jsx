@@ -5,7 +5,7 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
   return( 
         <div className="absolute w-screen h-screen bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <div className="rounded-xl fixed border border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="w-96 h-96 bg-primary rounded-xl">
+            <div className="w-max md:w-96 h-96 bg-primary rounded-xl">
               <div className="p-4" >
                 <p className = "text-xl"> Save your password</p>
                 <span
@@ -16,19 +16,24 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
                 </span>
               </div>
               <form onSubmit={savePassword}>
-                <div>
-                  <p>Set label</p> 
+                <div className="px-4 mb-10">
+                <label className="block tracking-wide text-primary font-bold mb-2" for="password-name">
+                  Password name:
+                </label>
               <input
-                    type="text"
+                    className="appearance-none block w-full border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-accent" id="password-name" type="text" placeholder="my awesome password"
                     onChange={(event) =>
                       setPassword({ ...password, name: event.target.value })
                     }
                     value={password.name}
                   />
                 </div>
-                <div>
-                  <p>Configure password</p>
+                <div className='px-4 mb-10'>
+                <label className="block tracking-wide text-primary font-bold mb-2" for="password-name">
+                  Configure password:
+                </label>
                   <input
+                    className="appearance-none block w-full border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-primary" id="password-name" type="text"
                     type="text"
                     onChange={(event) =>
                       setPassword({ ...password, value: event.target.value })
@@ -36,11 +41,13 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
                     value={password.value}
                   />
                 </div>
+                <div className='px-4'>
                 <input
-                  className="p-4 border border-cyan-900 cursor-pointer"
+                  className = 'w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'
                   type="submit"
                   value="Save password"
                 ></input>
+                </div>
               </form>
             </div>
           </div>
