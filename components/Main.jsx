@@ -9,8 +9,7 @@ const generator = require("generate-password");
 
 const Main = () => {
   const [password, setPassword] = useState({
-    id: "",
-    name: " ",
+    id: "", name: " ",
     value: initialState,
   });
 

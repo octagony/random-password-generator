@@ -9,24 +9,28 @@ const Generator = ({initialState, setInitialState, handleGeneratePassword, passw
  * 2. Fix checkboxes location 
  */
 
+  console.log(password)
   return(
         <form
           onSubmit={handleGeneratePassword}
-          className="p-4 border-2 border-amber-400"
+          className="p-4 rounded-xl"
         >
           <div>
-            <span className = 'text-primary text-lg'>Your password: </span>
+        {password.value ? (
+            <span className = 'text-primary text-lg block mb-2 '>Your password: </span>
+        ) : ( <span className = 'text-primary text-lg block mb-2'> Select the password length: </span>)}
             <p>{password.value}</p>
             {actionButtons ? (
-              <div>
+              <div className='flex flex-col md:flex-row md:justify-evenly'>
+
                 <button
-                  className="p-2 cursor-pointer"
+                  className = 'w-full md:w-1/2 my-2 md:mx-2  p-3 bg-button text-btnText rounded-2xl shadow-xl'
                   onClick={handleCopyToClipboard}
                 >
                   Copy to Clipboard
                 </button>
                 <button
-                  className="p-2 cursor-pointer"
+                  className = 'w-full md:w-1/2 my-2 md:mx-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'
                   onClick={() => setModalSave(true)}
                 >
                   Save Password
@@ -34,7 +38,7 @@ const Generator = ({initialState, setInitialState, handleGeneratePassword, passw
               </div>
             ) : null}
           </div>
-          <div>
+          <div className='px-4'>
               <Range passwordLength={passwordLength} handlePasswordLength={handlePasswordLength} />
             <span>Password Length:</span>
             <span>{passwordLength}</span>
@@ -46,7 +50,7 @@ const Generator = ({initialState, setInitialState, handleGeneratePassword, passw
           </div>
           <div>
             <input
-              className="p-2 bg-slate-500 cursor-pointer"
+              className = 'w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'
               type="submit"
               value="Generate password"
             />
