@@ -7,8 +7,8 @@ const Range = ({passwordLength, handlePasswordLength}) =>{
         type = "range"
         name = "length"
         onChange = { ()=> { handlePasswordLength(event) } }
-        min = "2"
-        max = "100"
+        min = "10"
+        max = "80"
         value = {passwordLength}
         className = 'mb-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'/>
     </label>

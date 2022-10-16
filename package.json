@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "eslint-plugin-react": "^7.31.10",
     "firebase": "^9.9.1",
     "generate-password": "^1.7.0",
     "next": "12.2.2",

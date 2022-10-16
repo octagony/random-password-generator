@@ -3,17 +3,18 @@ import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import Generator from "./Generator.jsx"
-import Modal from "./Modal.jsx"
+import Generator from "./Generator.jsx";
+import Modal from "./Modal.jsx";
 const generator = require("generate-password");
 
 const Main = () => {
   const [password, setPassword] = useState({
-    id: "", name: " ",
+    id: "",
+    name: " ",
     value: initialState,
   });
 
-  const [passwordLength, setPasswordLength] = useState(2);
+  const [passwordLength, setPasswordLength] = useState(10);
   const [actionButtons, setActionButtons] = useState(false);
   const [modalSave, setModalSave] = useState(false);
 
@@ -46,12 +47,12 @@ const Main = () => {
     }
   };
 
-  const updateCheckboxes = (event) =>{
+  const updateCheckboxes = (event) => {
     setInitialState({
       ...initialState,
-      [event.target.name]:event.target.checked
-    })
-  }
+      [event.target.name]: event.target.checked,
+    });
+  };
 
   const handlePasswordLength = (event) => {
     setPasswordLength(event.target.value);
@@ -61,9 +62,7 @@ const Main = () => {
     });
   };
 
-
   const handleGeneratePassword = (event) => {
-    event.preventDefault();
     setActionButtons(true);
     setInitialState({
       ...initialState,
@@ -84,12 +83,26 @@ const Main = () => {
 
   return (
     <div className="rounded grid text-center my-5 font-bold">
-      <h1 className = 'text-xl mb-2 '>Let&apos;s create a password for you!</h1>
+      <h1 className="text-xl mb-2 ">Let&apos;s create a password for you!</h1>
       <div>
-      <Generator initialStatei={initialState} setInitialState={setInitialState} handleGeneratePassword={handleGeneratePassword} password={password} actionButtons={actionButtons} handlePasswordLength = {handlePasswordLength} passwordLength = {passwordLength} updateCheckboxes = {updateCheckboxes} handleCopyToClipboard = {handleCopyToClipboard} setModalSave = {setModalSave}/>
+        <Generator
+          handleGeneratePassword={handleGeneratePassword}
+          password={password}
+          actionButtons={actionButtons}
+          handlePasswordLength={handlePasswordLength}
+          passwordLength={passwordLength}
+          updateCheckboxes={updateCheckboxes}
+          handleCopyToClipboard={handleCopyToClipboard}
+          setModalSave={setModalSave}
+        />
       </div>
       {modalSave ? (
-        <Modal savePassword={savePassword} password={password} setModalSave={setModalSave} setPassword = {setPassword}/>
+        <Modal
+          savePassword={savePassword}
+          password={password}
+          setModalSave={setModalSave}
+          setPassword={setPassword}
+        />
       ) : null}
     </div>
   );
