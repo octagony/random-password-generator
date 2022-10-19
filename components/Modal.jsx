@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
   return( 
         <div className="absolute w-screen h-screen bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-          <div className="rounded-xl fixed border border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="w-max md:w-96 h-96 bg-primary rounded-xl">
               <div className="p-4" >
                 <p className = "text-xl"> Save your password</p>
@@ -34,7 +34,6 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
                 </label>
                   <input
                     className="appearance-none block w-full border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-primary" id="password-name" type="text"
-                    type="text"
                     onChange={(event) =>
                       setPassword({ ...password, value: event.target.value })
                     }

@@ -17,7 +17,7 @@ const Main = () => {
   const [passwordLength, setPasswordLength] = useState(10);
   const [actionButtons, setActionButtons] = useState(false);
   const [modalSave, setModalSave] = useState(false);
-
+  
   const [initialState, setInitialState] = useState({
     length: 10,
     numbers: false,

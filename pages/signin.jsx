@@ -29,7 +29,7 @@ const Signin = () => {
     <div>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
         <h1 className="text-3xl font-bold">Sign In</h1>
-        {error ? <p className="bg-red-300 p-3 my-2">{error}</p> : null}
+        {error ? <p className="bg-primary border rounded-lg border-red-700 text-primary p-3 my-2">{error}</p> : null}
         <form onSubmit={handleLogin}>
           <div className="my-4">
             <label>Email</label>
@@ -57,7 +57,9 @@ const Signin = () => {
               <AiFillLock className="absolute right-2 top-3 text-gray-400" />
             </div>
           </div>
-          <button className="w-full my-2 p-3 bg-slate-600">Sign In</button>
+          <button className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'>
+            Sign In
+          </button>
         </form>
         <p className="my-4">
           Don&apos;t have an account?{" "}

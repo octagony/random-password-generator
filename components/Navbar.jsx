@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
-import { IconContext } from "react-icons";
 import ThemeToggle from "./ThemeToggle";
 
 /*
@@ -25,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="rounded flex items-center justify-between h-20 font-bold px-2">
+    <div className="rounded flex items-center justify-between px-6 mt-4 h-20 font-bold px-2">
       <Link href="/">
         <h1 className="text-2xl">Easy/Pass</h1>
       </Link>
@@ -36,9 +35,9 @@ const Navbar = () => {
         <Link href="/signin">
           <a className="p-4 hover:text-accent"> Sign In</a>
         </Link>
-        <Link href="/signin">
+        <Link href="/signup">
           <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl">
-            Sign In
+            Sign Up
           </a>
         </Link>
       </div>
@@ -62,7 +61,7 @@ const Navbar = () => {
           </li>
           <li className="border-b py-6">
             {" "}
-            <Link href="/">Account</Link>{" "}
+            <Link href="/account">Account</Link>{" "}
           </li>
           <li className="border-b py-6">
             {" "}
@@ -72,14 +71,12 @@ const Navbar = () => {
         <div className="flex flex-col w-full p-4">
           <Link href="/signin">
             <button className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl">
-              {" "}
-              Sign In{" "}
+              Sign In
             </button>
           </Link>
           <Link href="/signup">
             <button className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl">
-              {" "}
-              Sign Up{" "}
+              Sign Up
             </button>
           </Link>
         </div>

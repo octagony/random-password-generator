@@ -17,7 +17,7 @@ const Signup = () => {
     setError('');
     try {
       await signup(data.email, data.password);
-    } catch(error) {
+    } catch (error) {
       setError(error.message);
       console.log(error.message)
     }
@@ -55,7 +55,9 @@ const Signup = () => {
               <AiFillLock className="absolute right-2 top-3 text-gray-400" />
             </div>
           </div>
-          <button className="w-full my-2 p-3 bg-slate-600">Sign Up</button>
+          <button className='w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'>
+            Sign Up
+          </button>
         </form>
         <p className="my-4">
           Already have an account?{" "}
