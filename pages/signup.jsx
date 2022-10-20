@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
 
 const Signup = () => {
+  const router = useRouter();
   const { user, signup } = useAuth();
   const [error, setError] = useState('');
-  console.log(user);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,12 +15,12 @@ const Signup = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    setError('');
     try {
       await signup(data.email, data.password);
+      router.push("/account");
     } catch (error) {
       setError(error.message);
-      console.log(error.message)
+      console.error(error.message)
     }
   };
 

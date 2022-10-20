@@ -18,7 +18,7 @@ const Account = () => {
 
   useEffect(() => {
     if (!user) {
-      router.push("/");
+      router.push("/signup");
     }
   }, [router, user]);
 

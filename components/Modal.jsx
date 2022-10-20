@@ -17,7 +17,7 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
               </div>
               <form onSubmit={savePassword}>
                 <div className="px-4 mb-10">
-                <label className="block tracking-wide text-primary font-bold mb-2" for="password-name">
+                <label className="block tracking-wide text-primary font-bold mb-2" htmlFor="password-name">
                   Password name:
                 </label>
               <input
@@ -29,7 +29,7 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
                   />
                 </div>
                 <div className='px-4 mb-10'>
-                <label className="block tracking-wide text-primary font-bold mb-2" for="password-name">
+                <label className="block tracking-wide text-primary font-bold mb-2" htmlFor="password-name">
                   Configure password:
                 </label>
                   <input

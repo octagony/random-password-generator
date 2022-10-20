@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
+import { db } from "../config/firebase.config";
 import { useAuth } from "../context/AuthContext";
 
 const SavedPasswords = () => {
@@ -9,12 +9,12 @@ const SavedPasswords = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    onSnapshot(doc(db, "users", `${user.email}`), (doc) => {
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setPasswords(doc.data()?.watchList);
     });
-  }, [user.email]);
+  }, [user?.email]);
 
-  const passwordsPath = doc(db, "users", `${user.email}`);
+  const passwordsPath = doc(db, "users", `${user?.email}`);
   const deletePassword = async (passedId) => {
     try {
       const result = passwords.filter((password) => {

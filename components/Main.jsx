@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
-import { db } from "../config/firebase";
+import { db } from "../config/firebase.config";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import Generator from "./Generator.jsx";
 import Modal from "./Modal.jsx";
+import Popup from "./UI/Popup";
 const generator = require("generate-password");
+
+/*
+ TODO:
+ 1. Setup dynamic popup 
+*/
 
 const Main = () => {
   const [password, setPassword] = useState({
@@ -15,7 +21,9 @@ const Main = () => {
   });
 
   const [passwordLength, setPasswordLength] = useState(10);
+
   const [actionButtons, setActionButtons] = useState(false);
+
   const [modalSave, setModalSave] = useState(false);
   
   const [initialState, setInitialState] = useState({
@@ -27,6 +35,9 @@ const Main = () => {
   });
 
   const [savedPasswords, setSavedPasswords] = useState(false);
+
+  const [popupStatus, setPopupStatus] = useState(false);
+
   const { user } = useAuth();
 
   const passwordsPath = doc(db, "users", `${user?.email}`);
@@ -42,6 +53,11 @@ const Main = () => {
           value: password.value,
         }),
       });
+      setPopupStatus(true)
+      setTimeout(()=>{
+        setPopupStatus(false)
+      },3000)
+      setModalSave(false)
     } else {
       alert("Please sign in to save password!");
     }
@@ -104,6 +120,7 @@ const Main = () => {
           setPassword={setPassword}
         />
       ) : null}
+      {popupStatus && <Popup text='random text' status={'success'}/>}
     </div>
   );
 };

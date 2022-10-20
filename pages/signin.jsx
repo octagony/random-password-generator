@@ -3,7 +3,6 @@ import Link from "next/link";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import { login } from "../context/AuthContext";
 
 const Signin = () => {
   const router = useRouter();
@@ -21,7 +20,6 @@ const Signin = () => {
       router.push("/account");
     } catch (error) {
       setError(error.message);
-      console.log(error.message);
     }
   };
 
