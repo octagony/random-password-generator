@@ -44,9 +44,9 @@ const Generator = ({ handleGeneratePassword, password, actionButtons, handlePass
           </div>
         ) : null}
       </div>
-      <div className='px-4'>
+      <div className='p-6'>
         <Range passwordLength={passwordLength} handlePasswordLength={handlePasswordLength} />
-        <span>Password Length:</span>
+        <span className='mt-2'>Password Length:</span>
         <span>{passwordLength}</span>
       </div>
       <div className='grid grid-cols-1 place-items-center md:grid-cols-3'>

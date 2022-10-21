@@ -16,6 +16,8 @@ const SavedPasswords = () => {
 
   const passwordsPath = doc(db, "users", `${user?.email}`);
   const deletePassword = async (passedId) => {
+    const confirm = window.confirm('You Sure?');
+    if(confirm){
     try {
       const result = passwords.filter((password) => {
         return password.id !== passedId;
@@ -26,36 +28,33 @@ const SavedPasswords = () => {
     } catch (error) {
       console.log(error.message);
     }
+    }
   };
 
   return (
     <div>
-      {!passwords.length ? (
+      {!passwords?.length ? (
         <p>You don&apos;t have any passwords saved.</p>
       ) : (
-        <table className="w-full border-collapse text-center">
-          <thead>
-            <tr className="border-b">
-              <td className="px-4">Name</td>
-              <td>Password</td>
-              <td>Delete</td>
-            </tr>
-          </thead>
-          <tbody>
-            {passwords.map((password) => (
-              <tr key={password.id} className="h-[60px] overflow-hidden">
-                <td>{password?.name}</td>
-                <td>{password?.value}</td>
-                <td>
+        <div className="grid place-items-center w-full">
+          <div>
+            {passwords?.map((password) => (
+              <div key={password.id}>
+                <div className='flex justify-between items-center my-6 px-2 text-accent'>
+                <div className='text-xl font-bold'>{password?.name}</div>
+                <div>
                   <AiOutlineClose
                     className="cursor-pointer mx-auto"
                     onClick={() => deletePassword(password.id)}
+                    size={20}
                   />
-                </td>
-              </tr>
+                </div>
+                </div>
+                <div className='text-sm w-[300px] sm:w-[400px] md:w-full overflow-x-scroll whitespace-nowrap border-2 rounded-xl py-4 px-2'>{password?.value}</div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -78,6 +78,7 @@ const Main = () => {
     });
   };
 
+
   const handleGeneratePassword = (event) => {
     setActionButtons(true);
     setInitialState({
@@ -99,7 +100,7 @@ const Main = () => {
 
   return (
     <div className="rounded grid text-center my-5 font-bold">
-      <h1 className="text-xl mb-2 ">Let&apos;s create a password for you!</h1>
+      <h1 className="text-lg md:text-2xl mb-2 p-2" >Let&apos;s create a password for you!</h1>
       <div>
         <Generator
           handleGeneratePassword={handleGeneratePassword}
@@ -120,7 +121,6 @@ const Main = () => {
           setPassword={setPassword}
         />
       ) : null}
-      {popupStatus && <Popup text='random text' status={'success'}/>}
     </div>
   );
 };
