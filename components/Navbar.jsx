@@ -6,12 +6,12 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import ThemeToggle from "./ThemeToggle";
 
-
-
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const { user, logout } = useAuth();
+  
   const router = useRouter();
+  
   const handleMenu = () => {
     setNav((prev) => !prev);
   };
@@ -26,9 +26,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="rounded flex items-center justify-between px-4 mt-4 h-20 font-bold">
+    <div className="rounded flex items-center justify-between px-4  mt-4 h-20 font-bold">
       <Link href="/">
-        <h1 className="cursor-pointer text-3xl">Easy/Pass</h1>
+        <h1 className="cursor-pointer text-3xl ">Easy/Pass</h1>
       </Link>
       <div className="hidden md:block">
         <ThemeToggle />
@@ -36,7 +36,7 @@ const Navbar = () => {
       {user?.email ? (
         <div className="hidden  md:flex gap-1">
           <Link href="/account">
-            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block mr-2 hover:scale-105 transition-all">
+            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block  hover:scale-105 transition-all">
               Account
             </a>
           </Link>

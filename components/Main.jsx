@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase.config";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import Generator from "./Generator.jsx";
 import Modal from "./Modal.jsx";
-import Popup from "./UI/Popup";
+import Layout from "./Layout.jsx";
 const generator = require("generate-password");
-
-/*
- TODO:
- 1. Setup dynamic popup 
-*/
 
 const Main = () => {
   const [password, setPassword] = useState({
@@ -19,13 +14,9 @@ const Main = () => {
     name: " ",
     value: initialState,
   });
-
   const [passwordLength, setPasswordLength] = useState(10);
-
   const [actionButtons, setActionButtons] = useState(false);
-
   const [modalSave, setModalSave] = useState(false);
-  
   const [initialState, setInitialState] = useState({
     length: 10,
     numbers: false,
@@ -33,13 +24,10 @@ const Main = () => {
     lowercase: true,
     uppercase: false,
   });
-
   const [savedPasswords, setSavedPasswords] = useState(false);
-
   const [popupStatus, setPopupStatus] = useState(false);
 
   const { user } = useAuth();
-
   const passwordsPath = doc(db, "users", `${user?.email}`);
 
   const savePassword = async (event) => {
@@ -53,11 +41,8 @@ const Main = () => {
           value: password.value,
         }),
       });
-      setPopupStatus(true)
-      setTimeout(()=>{
-        setPopupStatus(false)
-      },3000)
-      setModalSave(false)
+      alert("Passsword saved!");
+      setModalSave(false);
     } else {
       alert("Please sign in to save password!");
     }
@@ -78,7 +63,6 @@ const Main = () => {
     });
   };
 
-
   const handleGeneratePassword = (event) => {
     setActionButtons(true);
     setInitialState({
@@ -93,15 +77,19 @@ const Main = () => {
     });
   };
 
-  const handleCopyToClipboard = (event) => {
+  const handleCopyToClipboard = async (event) => {
     event.preventDefault();
-    navigator.clipboard.writeText(password.value);
+    try {
+      await navigator.clipboard.writeText(password.value);
+      alert("Password copied to clipboard!");
+    } catch (e) {
+      console.error(e.name, e.message);
+      alert("Password not copied!");
+    }
   };
 
   return (
-    <div className="rounded grid text-center my-5 font-bold">
-      <h1 className="text-lg md:text-2xl mb-2 p-2" >Let&apos;s create a password for you!</h1>
-      <div>
+    <Layout>
         <Generator
           handleGeneratePassword={handleGeneratePassword}
           password={password}
@@ -112,7 +100,6 @@ const Main = () => {
           handleCopyToClipboard={handleCopyToClipboard}
           setModalSave={setModalSave}
         />
-      </div>
       {modalSave ? (
         <Modal
           savePassword={savePassword}
@@ -121,7 +108,7 @@ const Main = () => {
           setPassword={setPassword}
         />
       ) : null}
-    </div>
+    </Layout>
   );
 };
 
