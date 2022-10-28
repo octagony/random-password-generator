@@ -8,9 +8,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthContextProvider>
       <ThemeProvider>
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
+        <div className = "grid grid-rows-layout min-h-screen">
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
       </ThemeProvider>
     </AuthContextProvider>
   );

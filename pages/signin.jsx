@@ -10,6 +10,7 @@ const Signin = () => {
 
   const { login } = useAuth();
 
+  const [loader, setLoader] = useState(true);
   const [error, setError] = useState("");
   const [data, setData] = useState({
     email: "",
@@ -37,6 +38,9 @@ const Signin = () => {
         <title>Sign In</title>
       </Head>
       <div>
+        {/* {loader && <div className="top-0 left-0 absolute w-screen h-screen bg-opacity-20 bg-gray-900"> */}
+        {/*   <div className=" w-12 h-12 border-8 rounded-xl top-[50%] left-[50%] absolute absoluteCenter animate-spin"></div> */}
+        {/* </div>} */}
         <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
           <h1 className="text-3xl font-bold">Sign In</h1>
           {error ? (

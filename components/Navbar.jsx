@@ -16,6 +16,11 @@ const Navbar = () => {
     setNav((prev) => !prev);
   };
 
+  const handleNavigate = async (route)=>{
+    await router.push(`${route}`);
+    setNav((prev)=>false);
+  }
+
   const handleSignOut = async () => {
     try {
       await logout();
@@ -27,31 +32,23 @@ const Navbar = () => {
 
   return (
     <div className="rounded flex items-center justify-between px-4  mt-4 h-20 font-bold">
-      <Link href="/">
-        <h1 className="cursor-pointer text-3xl ">Easy/Pass</h1>
-      </Link>
+        <h1 className="cursor-pointer text-3xl" onClick={()=> handleNavigate('/')}>Easy/Pass</h1>
       <div className="hidden md:block">
         <ThemeToggle />
       </div>
       {user?.email ? (
         <div className="hidden  md:flex gap-1">
-          <Link href="/account">
-            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block  hover:scale-105 transition-all">
+            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block  hover:scale-105 transition-all" onClick={()=>handleNavigate('/account')} >
               Account
             </a>
-          </Link>
           <button onClick={handleSignOut}>Sign out</button>
         </div>
       ) : (
         <div className="hidden md:block">
-          <Link href="/signin">
-            <a className="p-4 hover:text-accent"> Sign In</a>
-          </Link>
-          <Link href="/signup">
-            <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl">
+            <a className="p-4 hover:text-accent" onClick={()=>handleNavigate('/signin')}> Sign In</a>
+            <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl" onClick={()=>handleNavigate('/signup')}>
               Sign Up
             </a>
-          </Link>
         </div>
       )}
 
@@ -69,12 +66,12 @@ const Navbar = () => {
         }
       >
         <ul className="w-full p-4 ">
-          <li className="border-b py-6">
-            <Link href="/"> Home </Link>
+          <li className="border-b py-6" onClick={()=>handleNavigate('/')}>
+            Home
           </li>
           {user?.email ? (
-            <li className="border-b py-6">
-              <Link href="/account">Account</Link>
+            <li className="border-b py-6"onClick={()=>handleNavigate('/account')}>
+              Account
             </li>
           ) : null}
           <li className="border-b py-6">
@@ -93,16 +90,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link href="/signin">
-                <button className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl">
-                  Sign In
-                </button>
-              </Link>
-              <Link href="/signup">
-                <button className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl">
-                  Sign Up
-                </button>
-              </Link>
+              <button className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl" onClick={()=>handleNavigate('/signin')}>
+                Sign In
+              </button>
+              <button className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl" onClick={()=>handleNavigate('/signup')}>
+                Sign Up
+              </button>
             </>
           )}
         </div>

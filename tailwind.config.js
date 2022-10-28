@@ -23,6 +23,9 @@ module.exports = {
         input: "var(--color-bg-input)",
         accent: "var(--color-bg-accent)",
       },
+      gridTemplateRows: {
+        layout: "auto 1fr auto",
+      }
     },
   },
   plugins: [],

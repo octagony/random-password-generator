@@ -10,6 +10,7 @@
   @apply border border-secondary rounded-2xl shadow-xl bg-primary max-w-[1140px] w-full mx-auto;
 }
 
+
 .dark {
   --color-bg-primary: #101216;
   --color-bg-secondary: #283141;
