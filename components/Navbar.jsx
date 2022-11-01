@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const { user, logout } = useAuth();
-  
+
   const router = useRouter();
   
   const handleMenu = () => {
@@ -17,8 +17,12 @@ const Navbar = () => {
   };
 
   const handleNavigate = async (route)=>{
-    await router.push(`${route}`);
+    try{
+    router.push(`${route}`);
     setNav((prev)=>false);
+    }catch(e){
+      console.error("Error: ${e.message}");
+    }
   }
 
   const handleSignOut = async () => {
@@ -45,8 +49,8 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="hidden md:block">
-            <a className="p-4 hover:text-accent" onClick={()=>handleNavigate('/signin')}> Sign In</a>
-            <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl" onClick={()=>handleNavigate('/signup')}>
+            <a className="p-4 hover:text-accent cursor-pointer" onClick={()=>handleNavigate('/signin')}> Sign In</a>
+            <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer" onClick={()=>handleNavigate('/signup')}>
               Sign Up
             </a>
         </div>

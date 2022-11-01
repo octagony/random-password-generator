@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
-import Head from "next/head";
+import Loader from '../components/UI/Loader'
 
 const Signup = () => {
   const router = useRouter();
   const { user, signup } = useAuth();
   const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -16,11 +18,14 @@ const Signup = () => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    setLoader(prev => !prev);
     try {
       await signup(data.email, data.password);
-      router.push("/account");
-    } catch (error) {
+      await router.push("/");
+      setLoader(prev => !prev);
+    }catch (error) {
       setError(error.message);
+      setLoader(prev => !prev);
       console.error(error.message);
     }
   };
@@ -32,6 +37,7 @@ const Signup = () => {
       </Head>
       <div>
         <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
+          {loader && <Loader/>}
           <h1 className="text-3xl font-bold">Sign Up</h1>
           {error ? <p className="bg-red-300 p-3 my-2">{error}</p> : null}
           <form onSubmit={handleSignUp}>

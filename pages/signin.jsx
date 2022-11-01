@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import {useState} from 'react';
 import Link from "next/link";
-import { AiOutlineMail, AiFillLock } from "react-icons/ai";
-import { useAuth } from "../context/AuthContext";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useAuth } from "../context/AuthContext";
+import { AiOutlineMail, AiFillLock } from "react-icons/ai";
+import Loader from '../components/UI/Loader'
 
 const Signin = () => {
   const router = useRouter();
 
   const { login } = useAuth();
 
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState({
     email: "",
@@ -23,11 +24,14 @@ const Signin = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoader(prev => !prev);
     try {
       await login(data.email, data.password);
       router.push("/account");
+      setLoader(prev => !prev);
     } catch (error) {
       const errorMessage = displayError(error.message);
+      setLoader(prev => !prev);
       setError(errorMessage);
     }
   };
@@ -38,9 +42,7 @@ const Signin = () => {
         <title>Sign In</title>
       </Head>
       <div>
-        {/* {loader && <div className="top-0 left-0 absolute w-screen h-screen bg-opacity-20 bg-gray-900"> */}
-        {/*   <div className=" w-12 h-12 border-8 rounded-xl top-[50%] left-[50%] absolute absoluteCenter animate-spin"></div> */}
-        {/* </div>} */}
+       {loader && <Loader/>}
         <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
           <h1 className="text-3xl font-bold">Sign In</h1>
           {error ? (

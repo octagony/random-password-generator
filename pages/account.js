@@ -1,25 +1,30 @@
-import React, { useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 import SavedPasswords from "../components/SavedPasswords";
 import Head from "next/head";
+import Loader from '../components/UI/Loader'
 
 const Account = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const [loader, setLoader] = useState(false);
 
   const handleSignOut = async () => {
+    setLoader(prev => !prev);
     try {
       await logout();
       router.push("/signin");
+      setLoader(prev => !prev);
     } catch (error) {
       console.log(error.message);
+      setLoader(prev => !prev);
     }
   };
 
   useEffect(() => {
     if (!user) {
-      router.push("/signup");
+      router.push("/signin");
     }
   }, [router, user]);
 
@@ -29,7 +34,7 @@ const Account = () => {
         <title>Accout</title>
       </Head>
       <div className="max-w-[1140px] mx-auto">
-        <div className="flex justify-between items-center my-12 py-8 px-4">
+        <div className="flex justify-between items-center my-12 py-8 px-4 md:gap-6">
           <div>
             <h1 className="text-2xl font-bold"> Account </h1>
             <div>
