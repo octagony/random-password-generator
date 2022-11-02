@@ -41,8 +41,8 @@ const Navbar = () => {
         <ThemeToggle />
       </div>
       {user?.email ? (
-        <div className="hidden  md:flex gap-1">
-            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block  hover:scale-105 transition-all" onClick={()=>handleNavigate('/account')} >
+        <div className="hidden md:flex gap-2">
+            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block cursor-pointer hover:scale-105 transition-all" onClick={()=>handleNavigate('/account')} >
               Account
             </a>
           <button onClick={handleSignOut}>Sign out</button>

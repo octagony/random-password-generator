@@ -12,7 +12,7 @@ const Account = () => {
 
   const handleSignOut = async () => {
     setLoader(prev => !prev);
-    try {
+    try { 
       await logout();
       router.push("/signin");
       setLoader(prev => !prev);
@@ -31,10 +31,11 @@ const Account = () => {
   return (
     <>
       <Head>
-        <title>Accout</title>
+        <title>Account</title>
       </Head>
       <div className="max-w-[1140px] mx-auto">
-        <div className="flex justify-between items-center my-12 py-8 px-4 md:gap-6">
+        {loader && <Loader/>}
+        <div className="flex justify-between items-center my-12 py-8 px-4 gap-6 flex-col sm:flex-row sm:gap-12">
           <div>
             <h1 className="text-2xl font-bold"> Account </h1>
             <div>
@@ -52,7 +53,7 @@ const Account = () => {
         </div>
         <div>
           <div className="flex justify-between items-center my-12 py-8">
-            <div className="w-full min-h-[300px] px-4">
+            <div className="w-full min-h-[300px] px-4 text-center">
               <h2 className="text-2xl font-bold py-4">Saved Passwords</h2>
               <SavedPasswords />
             </div>

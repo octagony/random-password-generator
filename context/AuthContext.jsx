@@ -15,7 +15,6 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  
 
   useEffect(() => {
     const unsubsribe = onAuthStateChanged(auth, (user) => {
@@ -34,11 +33,15 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubsribe();
   }, []);
 
-  const signup = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
-    return setDoc(doc(db, "users", email), {
-      watchList: [],
-    });
+  const signup = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      return setDoc(doc(db, "users", email), {
+        watchList: [],
+      });
+    } catch (error) {
+      alert("The email address is already in use");
+    }
   };
 
   const login = (email, password) => {

@@ -8,7 +8,7 @@ import Loader from '../components/UI/Loader'
 
 const Signup = () => {
   const router = useRouter();
-  const { user, signup } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loader, setLoader] = useState(false);
   const [data, setData] = useState({
@@ -20,7 +20,7 @@ const Signup = () => {
     event.preventDefault();
     setLoader(prev => !prev);
     try {
-      await signup(data.email, data.password);
+      await signup(data.email, data.password)
       await router.push("/");
       setLoader(prev => !prev);
     }catch (error) {

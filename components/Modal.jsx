@@ -7,7 +7,7 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
           <div className="rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="w-max md:w-96 h-96 bg-primary rounded-xl">
               <div className="p-4" >
-                <p className = "text-xl"> Save your password</p>
+                <p className = "text-xl cursor-pointer"> Save your password</p>
                 <span
                   className="cursor-pointer absolute top-5 right-4"
                   onClick={() => setModalSave(false)}
@@ -42,7 +42,7 @@ const Modal = ({savePassword, password, setModalSave, setPassword}) =>{
                 </div>
                 <div className='px-4'>
                 <input
-                  className = 'w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl'
+                  className = 'w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl cursor-pointer'
                   type="submit"
                   value="Save password"
                 ></input>
