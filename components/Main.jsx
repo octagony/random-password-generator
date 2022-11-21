@@ -90,16 +90,16 @@ const Main = () => {
 
   return (
     <Layout>
-        <Generator
-          handleGeneratePassword={handleGeneratePassword}
-          password={password}
-          actionButtons={actionButtons}
-          handlePasswordLength={handlePasswordLength}
-          passwordLength={passwordLength}
-          updateCheckboxes={updateCheckboxes}
-          handleCopyToClipboard={handleCopyToClipboard}
-          setModalSave={setModalSave}
-        />
+      <Generator
+        handleGeneratePassword={handleGeneratePassword}
+        password={password}
+        actionButtons={actionButtons}
+        handlePasswordLength={handlePasswordLength}
+        passwordLength={passwordLength}
+        updateCheckboxes={updateCheckboxes}
+        handleCopyToClipboard={handleCopyToClipboard}
+        setModalSave={setModalSave}
+      />
       {modalSave ? (
         <Modal
           savePassword={savePassword}

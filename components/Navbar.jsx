@@ -11,19 +11,19 @@ const Navbar = () => {
   const { user, logout } = useAuth();
 
   const router = useRouter();
-  
+
   const handleMenu = () => {
     setNav((prev) => !prev);
   };
 
-  const handleNavigate = async (route)=>{
-    try{
-    router.push(`${route}`);
-    setNav((prev)=>false);
-    }catch(e){
+  const handleNavigate = async (route) => {
+    try {
+      router.push(`${route}`);
+      setNav((prev) => false);
+    } catch (e) {
       console.error("Error: ${e.message}");
     }
-  }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -36,23 +36,40 @@ const Navbar = () => {
 
   return (
     <div className="rounded flex items-center justify-between px-4  mt-4 h-20 font-bold">
-        <h1 className="cursor-pointer text-3xl" onClick={()=> handleNavigate('/')}>Easy/Pass</h1>
+      <h1
+        className="cursor-pointer text-3xl"
+        onClick={() => handleNavigate("/")}
+      >
+        Easy/Pass
+      </h1>
       <div className="hidden md:block">
         <ThemeToggle />
       </div>
       {user?.email ? (
         <div className="hidden md:flex gap-2">
-            <a className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block cursor-pointer hover:scale-105 transition-all" onClick={()=>handleNavigate('/account')} >
-              Account
-            </a>
+          <a
+            className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block cursor-pointer hover:scale-105 transition-all"
+            onClick={() => handleNavigate("/account")}
+          >
+            Account
+          </a>
           <button onClick={handleSignOut}>Sign out</button>
         </div>
       ) : (
         <div className="hidden md:block">
-            <a className="p-4 hover:text-accent cursor-pointer" onClick={()=>handleNavigate('/signin')}> Sign In</a>
-            <a className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer" onClick={()=>handleNavigate('/signup')}>
-              Sign Up
-            </a>
+          <a
+            className="p-4 hover:text-accent cursor-pointer"
+            onClick={() => handleNavigate("/signin")}
+          >
+            {" "}
+            Sign In
+          </a>
+          <a
+            className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer"
+            onClick={() => handleNavigate("/signup")}
+          >
+            Sign Up
+          </a>
         </div>
       )}
 
@@ -70,11 +87,14 @@ const Navbar = () => {
         }
       >
         <ul className="w-full p-4 ">
-          <li className="border-b py-6" onClick={()=>handleNavigate('/')}>
+          <li className="border-b py-6" onClick={() => handleNavigate("/")}>
             Home
           </li>
           {user?.email ? (
-            <li className="border-b py-6"onClick={()=>handleNavigate('/account')}>
+            <li
+              className="border-b py-6"
+              onClick={() => handleNavigate("/account")}
+            >
               Account
             </li>
           ) : null}
@@ -94,10 +114,16 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <button className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl" onClick={()=>handleNavigate('/signin')}>
+              <button
+                className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl"
+                onClick={() => handleNavigate("/signin")}
+              >
                 Sign In
               </button>
-              <button className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl" onClick={()=>handleNavigate('/signup')}>
+              <button
+                className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+                onClick={() => handleNavigate("/signup")}
+              >
                 Sign Up
               </button>
             </>
