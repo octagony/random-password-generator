@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import Checkbox from './UI/Checkbox.jsx'
-import Range from './UI/Range.jsx'
+import Checkbox from '../UI/Checkbox.jsx'
+import Range from '../UI/Range.jsx'
 
 const Generator = ({ handleGeneratePassword, password, actionButtons, handlePasswordLength, passwordLength, updateCheckboxes, handleCopyToClipboard, setModalSave }) => {
-  /*
-   * TODO:
-   * 1. Scrollable password window
-   */
 
   const [firstAttempt, setFirstAttempt] = useState(true);
 

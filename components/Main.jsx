@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase.config";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import Generator from "./Generator.jsx";
+import Generator from "./Generator/Generator.jsx";
 import Modal from "./Modal.jsx";
 import Layout from "./Layout.jsx";
 const generator = require("generate-password");
@@ -63,7 +63,7 @@ const Main = () => {
     });
   };
 
-  const handleGeneratePassword = (event) => {
+  const handleGeneratePassword = () => {
     setActionButtons(true);
     setInitialState({
       ...initialState,
