@@ -1,9 +1,9 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 import SavedPasswords from "../components/SavedPasswords";
 import Head from "next/head";
-import Loader from '../components/UI/Loader'
+import Loader from "../components/UI/Loader";
 
 const Account = () => {
   const { user, logout } = useAuth();
@@ -11,14 +11,14 @@ const Account = () => {
   const [loader, setLoader] = useState(false);
 
   const handleSignOut = async () => {
-    setLoader(prev => !prev);
-    try { 
+    setLoader((prev) => !prev);
+    try {
       await logout();
       router.push("/signin");
-      setLoader(prev => !prev);
+      setLoader((prev) => !prev);
     } catch (error) {
       console.log(error.message);
-      setLoader(prev => !prev);
+      setLoader((prev) => !prev);
     }
   };
 
@@ -34,7 +34,7 @@ const Account = () => {
         <title>Account</title>
       </Head>
       <div className="max-w-[1140px] mx-auto">
-        {loader && <Loader/>}
+        {loader && <Loader />}
         <div className="flex justify-between items-center my-12 py-8 px-4 gap-6 flex-col sm:flex-row sm:gap-12">
           <div>
             <h1 className="text-2xl font-bold"> Account </h1>

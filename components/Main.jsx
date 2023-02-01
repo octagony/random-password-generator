@@ -3,10 +3,10 @@ import { v4 as generateId } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../config/firebase.config";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import Generator from "./Generator/Generator.jsx";
+import Generator from "./Generator";
 import Modal from "./Modal.jsx";
-import Layout from "./Layout.jsx";
-const generator = require("generate-password");
+import Layout from "./Layout";
+import { generate } from "generate-password";
 
 const Main = () => {
   const [password, setPassword] = useState({
@@ -25,7 +25,6 @@ const Main = () => {
     uppercase: false,
   });
   const [savedPasswords, setSavedPasswords] = useState(false);
-  const [popupStatus, setPopupStatus] = useState(false);
 
   const { user } = useAuth();
   const passwordsPath = doc(db, "users", `${user?.email}`);
@@ -70,7 +69,7 @@ const Main = () => {
       length: parseInt(initialState.length),
     });
 
-    const getPassword = generator.generate(initialState);
+    const getPassword = generate(initialState);
     setPassword({
       ...password,
       value: getPassword,
@@ -90,16 +89,16 @@ const Main = () => {
 
   return (
     <Layout>
-        <Generator
-          handleGeneratePassword={handleGeneratePassword}
-          password={password}
-          actionButtons={actionButtons}
-          handlePasswordLength={handlePasswordLength}
-          passwordLength={passwordLength}
-          updateCheckboxes={updateCheckboxes}
-          handleCopyToClipboard={handleCopyToClipboard}
-          setModalSave={setModalSave}
-        />
+      <Generator
+        handleGeneratePassword={handleGeneratePassword}
+        password={password}
+        actionButtons={actionButtons}
+        handlePasswordLength={handlePasswordLength}
+        passwordLength={passwordLength}
+        updateCheckboxes={updateCheckboxes}
+        handleCopyToClipboard={handleCopyToClipboard}
+        setModalSave={setModalSave}
+      />
       {modalSave ? (
         <Modal
           savePassword={savePassword}
