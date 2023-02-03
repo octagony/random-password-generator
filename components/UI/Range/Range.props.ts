@@ -1,4 +1,6 @@
+import { SyntheticEvent } from "react";
+
 export interface IRange {
   passwordLength: number;
-  handlePasswordLength: () => void;
+  handlePasswordLength: (event: SyntheticEvent) => void;
 }

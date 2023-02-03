@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { v4 as generateId } from "uuid";
-import { useAuth } from "../context/AuthContext";
-import { db } from "../config/firebase.config";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import Generator from "./Generator";
-import Modal from "./Modal.jsx";
-import Layout from "./Layout";
 import { generate } from "generate-password";
+import { IState, IPassword } from "../../types/state";
+import { useAuth } from "../../context/AuthContext";
+import { db } from "../../config/firebase.config";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import Layout from "../Layout";
+import Generator from "../Generator";
+import Modal from "../Modal";
 
 const Main = () => {
-  const [password, setPassword] = useState({
-    id: "",
-    name: " ",
-    value: initialState,
-  });
-  const [passwordLength, setPasswordLength] = useState(10);
-  const [actionButtons, setActionButtons] = useState(false);
-  const [modalSave, setModalSave] = useState(false);
-  const [initialState, setInitialState] = useState({
+  const [initialState, setInitialState] = useState<IState>({
     length: 10,
     numbers: false,
     symbols: false,
     lowercase: true,
     uppercase: false,
   });
-  const [savedPasswords, setSavedPasswords] = useState(false);
+
+  const [password, setPassword] = useState<IPassword>({
+    id: "",
+    name: "",
+    value: initialState,
+  });
+
+  const [passwordLength, setPasswordLength] = useState<number>(10);
+  const [actionButtons, setActionButtons] = useState<boolean>(false);
+  const [modalSave, setModalSave] = useState<boolean>(false);
+  const [, setSavedPasswords] = useState<boolean>(false);
 
   const { user } = useAuth();
   const passwordsPath = doc(db, "users", `${user?.email}`);
 
-  const savePassword = async (event) => {
+  const savePassword = async (event: SyntheticEvent) => {
     event.preventDefault();
     if (user?.email) {
       setSavedPasswords(true);
@@ -47,18 +50,20 @@ const Main = () => {
     }
   };
 
-  const updateCheckboxes = (event) => {
+  const updateCheckboxes = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement;
     setInitialState({
       ...initialState,
-      [event.target.name]: event.target.checked,
+      [target.name]: target.checked,
     });
   };
 
-  const handlePasswordLength = (event) => {
-    setPasswordLength(event.target.value);
+  const handlePasswordLength = (event: SyntheticEvent) => {
+    const target = event.target as HTMLInputElement;
+    setPasswordLength(parseInt(target.value));
     setInitialState({
       ...initialState,
-      [event.target.name]: event.target.value,
+      [target.name]: target.value,
     });
   };
 
@@ -68,7 +73,6 @@ const Main = () => {
       ...initialState,
       length: parseInt(initialState.length),
     });
-
     const getPassword = generate(initialState);
     setPassword({
       ...password,
@@ -76,7 +80,7 @@ const Main = () => {
     });
   };
 
-  const handleCopyToClipboard = async (event) => {
+  const handleCopyToClipboard = async (event: SyntheticEvent) => {
     event.preventDefault();
     try {
       await navigator.clipboard.writeText(password.value);
