@@ -21,14 +21,13 @@ const Main = () => {
   const [password, setPassword] = useState<IPassword>({
     id: "",
     name: "",
-    value: initialState,
+    value: "",
   });
 
   const [passwordLength, setPasswordLength] = useState<number>(10);
   const [actionButtons, setActionButtons] = useState<boolean>(false);
   const [modalSave, setModalSave] = useState<boolean>(false);
   const [, setSavedPasswords] = useState<boolean>(false);
-
   const { user } = useAuth();
   const passwordsPath = doc(db, "users", `${user?.email}`);
 

@@ -9,5 +9,5 @@ export interface IState {
 export interface IPassword {
   id: string;
   name: string;
-  value: IState;
+  value: string;
 }

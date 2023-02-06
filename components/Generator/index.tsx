@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import Checkbox from "../UI/Checkbox/";
 import { IGenerator } from "./Generator.props";
 import Range from "../UI/Range";
@@ -15,10 +15,10 @@ const Generator = ({
 }: IGenerator) => {
   const [firstAttempt, setFirstAttempt] = useState(true);
 
-  const handleFirstGenerate = (event) => {
+  const handleFirstGenerate = (event: SyntheticEvent) => {
     event.preventDefault();
     setFirstAttempt(!firstAttempt ? firstAttempt : !firstAttempt);
-    handleGeneratePassword(event);
+    handleGeneratePassword();
   };
 
   return (
