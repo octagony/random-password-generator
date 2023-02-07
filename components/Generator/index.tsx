@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from "react";
 import Checkbox from "../UI/Checkbox/";
 import { IGenerator } from "./Generator.props";
 import Range from "../UI/Range";
+import styles from "./Generator.module.css";
 
 const Generator = ({
   handleGeneratePassword,
@@ -24,38 +25,32 @@ const Generator = ({
   return (
     <form
       onSubmit={(event) => handleFirstGenerate(event)}
-      className="p-4 rounded-xl"
+      className={styles.form}
     >
       <div>
         {password.value ? (
-          <span className="text-primary text-lg block mb-2">
-            Your password:{" "}
-          </span>
+          <span className={styles.password__value}>Your password: </span>
         ) : (
-          <span className="text-primary text-lg block mb-2">
+          <span className={styles.password__value}>
             {" "}
             Select the password length:{" "}
           </span>
         )}
         <span
-          className={
-            firstAttempt
-              ? "hidden"
-              : "p-4 border-2 mb-4 rounded-xl text-xl font-mono overflow-x-auto overflow-y-hidden w-[280px] md:w-[500px] lg:w-[760px] xl:w-full mx-auto block"
-          }
+          className={firstAttempt ? `${styles.hide}` : `${styles.password}`}
         >
           {password.value}
         </span>
         {actionButtons ? (
-          <div className="flex flex-col md:flex-row md:justify-evenly mb-5">
+          <div className={styles.action__buttons}>
             <button
-              className="w-full md:w-1/2 my-2 md:mx-2  p-3 bg-button text-btnText rounded-2xl shadow-xl"
+              className={styles.action__button}
               onClick={handleCopyToClipboard}
             >
               Copy to Clipboard
             </button>
             <button
-              className="w-full md:w-1/2 my-2 md:mx-2 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+              className={styles.action__button}
               onClick={() => setModalSave(true)}
             >
               Save Password
@@ -63,7 +58,7 @@ const Generator = ({
           </div>
         ) : null}
       </div>
-      <div className="p-6">
+      <div className={styles.range}>
         <Range
           passwordLength={passwordLength}
           handlePasswordLength={handlePasswordLength}
@@ -71,7 +66,7 @@ const Generator = ({
         <span className="mt-2">Password Length:</span>
         <span>{passwordLength}</span>
       </div>
-      <div className="grid grid-cols-1 place-items-center md:grid-cols-3">
+      <div className={styles.grid__checkboxes}>
         <Checkbox updateCheckboxes={updateCheckboxes} name="numbers">
           Include numbers
         </Checkbox>
@@ -84,7 +79,7 @@ const Generator = ({
       </div>
       <div>
         <input
-          className="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+          className={styles.generate__button}
           type="submit"
           value="Generate password"
         />

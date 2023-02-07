@@ -1,9 +1,10 @@
 import Logo from "../UI/Logo";
 import { ILayout } from "./Layout.props";
+import styles from "./Layout.module.css";
 
 const Layout = ({ children }: ILayout) => {
   return (
-    <div className="rounded grid text-center my-5 font-bold">
+    <div className={styles.layout}>
       <Logo />
       {children}
     </div>

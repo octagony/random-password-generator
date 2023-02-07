@@ -1,0 +1,15 @@
+.footer {
+  @apply w-full text-center mt-2 rounded-3xl py-2;
+}
+
+.link {
+  @apply inline-block;
+}
+
+.icon {
+  @apply mx-auto;
+}
+
+.about {
+  @apply text-primary font-bold;
+}

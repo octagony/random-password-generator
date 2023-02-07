@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Loader from "../components/UI/Loader";
@@ -16,7 +16,7 @@ const Signup = () => {
     password: "",
   });
 
-  const handleSignUp = async (event) => {
+  const handleSignUp = async (event: SyntheticEvent) => {
     event.preventDefault();
     setLoader((prev) => !prev);
     try {

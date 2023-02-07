@@ -7,7 +7,7 @@ const Modal = ({
   password,
   setModalSave,
   setPassword,
-}: IModal) => {
+}: IModal): JSX.Element => {
   return (
     <div className="absolute w-screen h-screen bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
       <div className="rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

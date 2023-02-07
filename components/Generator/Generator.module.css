@@ -1,0 +1,35 @@
+.form {
+  @apply p-4 rounded-xl;
+}
+
+.password__value {
+  @apply text-primary text-lg block mb-2;
+}
+
+.hide {
+  @apply hidden;
+}
+
+.password {
+  @apply p-4 border-2 mb-4 rounded-xl text-xl font-mono overflow-x-auto overflow-y-hidden w-[280px] md:w-[500px] lg:w-[760px] xl:w-full mx-auto block;
+}
+
+.action__buttons {
+  @apply flex flex-col md:flex-row md:justify-evenly mb-5;
+}
+
+.action__button {
+  @apply w-full md:w-1/2 my-2 md:mx-2  p-3 bg-button text-btnText rounded-2xl shadow-xl;
+}
+
+.range {
+  @apply p-6;
+}
+
+.grid__checkboxes {
+  @apply grid grid-cols-1 place-items-center md:grid-cols-3;
+}
+
+.generate__button {
+  @apply w-full my-8 p-3 bg-button text-btnText rounded-2xl shadow-xl;
+}

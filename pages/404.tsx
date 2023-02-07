@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 
-const custom404 = () => {
+const custom404 = (): JSX.Element => {
   return (
     <>
       <Head>

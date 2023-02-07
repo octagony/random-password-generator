@@ -1,13 +1,20 @@
-import {AiFillGithub} from 'react-icons/ai'
+import { AiFillGithub } from "react-icons/ai";
+import styles from "./Footer.module.css";
 
-const Footer = () =>{
- return(
-   <div className="w-full text-center mt-2 rounded-3xl py-2">
-      <a className="inline-block" href="https://github.com/octagony" target='_blank' rel="noreferrer">
-        <AiFillGithub className="mx-auto" size={40} />
+const Footer = () => {
+  return (
+    <div className={styles.footer}>
+      <a
+        className={styles.link}
+        href="https://github.com/octagony"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <AiFillGithub className={styles.icon} size={40} />
       </a>
-     <p className='text-primary font-bold'>Octagony / {new Date().getFullYear()}</p>
-    </div> )
-}
+      <p className={styles.about}>Octagony / {new Date().getFullYear()}</p>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

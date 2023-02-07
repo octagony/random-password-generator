@@ -1,8 +1,17 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  SetStateAction,
+  Dispatch,
+} from "react";
 
-type ThemeContextType = "light" | "dark";
+interface IThemeContext {
+  theme: string;
+  setTheme: Dispatch<SetStateAction<string>>;
+}
 
-const getInitialTheme = (): ThemeContextType => {
+const getInitialTheme = (): string => {
   if (typeof window !== "undefined" && window.localStorage) {
     const storedPrefs = window.localStorage.getItem("color-theme");
     if (!storedPrefs) {
@@ -15,12 +24,12 @@ const getInitialTheme = (): ThemeContextType => {
   return "light";
 };
 
-export const ThemeContext = createContext<ThemeContextType>("light");
+export const ThemeContext = createContext<IThemeContext | undefined>(undefined);
 
 export const ThemeProvider = ({ initialTheme, children }) => {
-  const [theme, setTheme] = useState<ThemeContextType>(getInitialTheme);
+  const [theme, setTheme] = useState<string>(getInitialTheme);
 
-  const rawSetTheme = (theme: ThemeContextType) => {
+  const rawSetTheme = (theme: string) => {
     const root = window.document.documentElement;
 
     root.classList.remove(theme === "dark" ? "light" : "dark");

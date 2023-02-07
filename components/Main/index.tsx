@@ -70,9 +70,11 @@ const Main = () => {
     setActionButtons(true);
     setInitialState({
       ...initialState,
-      length: parseInt(initialState.length),
+      length: initialState.length,
     });
+
     const getPassword = generate(initialState);
+
     setPassword({
       ...password,
       value: getPassword,

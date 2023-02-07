@@ -1,16 +1,14 @@
-import {useState} from 'react';
+import { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 import { AiOutlineMail, AiFillLock } from "react-icons/ai";
-import Loader from '../components/UI/Loader'
+import Loader from "../components/UI/Loader";
 
-const Signin = () => {
+const Signin = (): JSX.Element => {
   const router = useRouter();
-
   const { login } = useAuth();
-
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState({
@@ -18,20 +16,22 @@ const Signin = () => {
     password: "",
   });
 
-  const displayError = (errorMessage)=> {
-    return errorMessage.includes('password') ? 'Sorry, wrong password' : 'Something wrong with your e-mail'
-}
+  const displayError = (errorMessage: string) => {
+    return errorMessage.includes("password")
+      ? "Sorry, wrong password"
+      : "Something wrong with your e-mail";
+  };
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: SyntheticEvent) => {
     event.preventDefault();
-    setLoader(prev => !prev);
+    setLoader((prev) => !prev);
     try {
       await login(data.email, data.password);
       router.push("/account");
-      setLoader(prev => !prev);
+      setLoader((prev) => !prev);
     } catch (error) {
       const errorMessage = displayError(error.message);
-      setLoader(prev => !prev);
+      setLoader((prev) => !prev);
       setError(errorMessage);
     }
   };
@@ -42,7 +42,7 @@ const Signin = () => {
         <title>Sign In</title>
       </Head>
       <div>
-       {loader && <Loader/>}
+        {loader && <Loader />}
         <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
           <h1 className="text-3xl font-bold">Sign In</h1>
           {error ? (
