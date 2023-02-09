@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { ICheckbox } from "./Checkbox.props";
 
 const Checkbox = ({ updateCheckboxes, name, children }: ICheckbox) => {
@@ -8,7 +8,7 @@ const Checkbox = ({ updateCheckboxes, name, children }: ICheckbox) => {
         className="my-auto transform scale-125"
         name={name}
         type="checkbox"
-        onChange={() => {
+        onChange={(event: SyntheticEvent) => {
           updateCheckboxes(event);
         }}
       />

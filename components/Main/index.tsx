@@ -8,6 +8,7 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import Layout from "../Layout";
 import Generator from "../Generator";
 import Modal from "../Modal";
+import AlertBox from "../AlertBox";
 
 const Main = () => {
   const [initialState, setInitialState] = useState<IState>({
@@ -28,6 +29,11 @@ const Main = () => {
   const [actionButtons, setActionButtons] = useState<boolean>(false);
   const [modalSave, setModalSave] = useState<boolean>(false);
   const [, setSavedPasswords] = useState<boolean>(false);
+  const [alertStatus, setAlertStatus] = useState({
+    status: "",
+    show: false,
+    msg: "",
+  });
   const { user } = useAuth();
   const passwordsPath = doc(db, "users", `${user?.email}`);
 
@@ -42,10 +48,18 @@ const Main = () => {
           value: password.value,
         }),
       });
-      alert("Passsword saved!");
+      setAlertStatus({
+        status: "success",
+        show: true,
+        msg: "Password Saved!",
+      });
       setModalSave(false);
     } else {
-      alert("Please sign in to save password!");
+      setAlertStatus({
+        status: "error",
+        show: true,
+        msg: "Please sign in to save password!",
+      });
     }
   };
 
@@ -112,6 +126,10 @@ const Main = () => {
           setPassword={setPassword}
         />
       ) : null}
+      <AlertBox
+        alertStatus={alertStatus}
+        setAlertStatus={setAlertStatus}
+      ></AlertBox>
     </Layout>
   );
 };
