@@ -9,6 +9,7 @@ import Layout from "../Layout";
 import Generator from "../Generator";
 import Modal from "../Modal";
 import AlertBox from "../AlertBox";
+import { IAlertStatus } from "../AlertBox/AlertBox.props";
 
 const Main = () => {
   const [initialState, setInitialState] = useState<IState>({
@@ -29,8 +30,7 @@ const Main = () => {
   const [actionButtons, setActionButtons] = useState<boolean>(false);
   const [modalSave, setModalSave] = useState<boolean>(false);
   const [, setSavedPasswords] = useState<boolean>(false);
-  const [alertStatus, setAlertStatus] = useState({
-    status: "",
+  const [alertStatus, setAlertStatus] = useState<IAlertStatus>({
     show: false,
     msg: "",
   });
@@ -49,14 +49,12 @@ const Main = () => {
         }),
       });
       setAlertStatus({
-        status: "success",
         show: true,
         msg: "Password Saved!",
       });
       setModalSave(false);
     } else {
       setAlertStatus({
-        status: "error",
         show: true,
         msg: "Please sign in to save password!",
       });
