@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import { useRouter } from "next/router";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import ThemeToggle from "../ThemeToggle";
 import { useAuth } from "../../context/AuthContext";
+import style from "./Navbar.module.css";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -35,20 +35,17 @@ const Navbar = () => {
   };
 
   return (
-    <div className="rounded flex items-center justify-between px-4  mt-4 h-20 font-bold">
-      <h1
-        className="cursor-pointer text-3xl"
-        onClick={() => handleNavigate("/")}
-      >
+    <div className={style.wrapper}>
+      <h1 className={style.logo} onClick={() => handleNavigate("/")}>
         Easy/Pass
       </h1>
-      <div className="hidden md:block">
+      <div className={style.theme}>
         <ThemeToggle />
       </div>
       {user?.email ? (
-        <div className="hidden md:flex gap-2">
+        <div className={style.email__wrapper}>
           <a
-            className="p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block cursor-pointer hover:scale-105 transition-all"
+            className={style.email__button}
             onClick={() => handleNavigate("/account")}
           >
             Account
@@ -56,16 +53,16 @@ const Navbar = () => {
           <button onClick={handleSignOut}>Sign out</button>
         </div>
       ) : (
-        <div className="hidden md:block">
+        <div className={style.account__wrapper}>
           <a
-            className="p-4 hover:text-accent cursor-pointer"
+            className={style.signin__button}
             onClick={() => handleNavigate("/signin")}
           >
             {" "}
             Sign In
           </a>
           <a
-            className="bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer"
+            className={style.signup__button}
             onClick={() => handleNavigate("/signup")}
           >
             Sign Up
@@ -74,39 +71,33 @@ const Navbar = () => {
       )}
 
       {/* Menu */}
-      <div className="block md:hidden cursor-pointer z-10" onClick={handleMenu}>
+      <div className={style.menu__button} onClick={handleMenu}>
         {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
       </div>
 
       {/*Mobile Menu */}
-      <div
-        className={
-          nav
-            ? "md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10"
-            : "fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-300"
-        }
-      >
-        <ul className="w-full p-4 ">
-          <li className="border-b py-6" onClick={() => handleNavigate("/")}>
+      <div className={nav ? `${style.menu__hidden}` : `${style.menu__open}`}>
+        <ul className={style.menu__wrapper}>
+          <li className={style.main__btns} onClick={() => handleNavigate("/")}>
             Home
           </li>
           {user?.email ? (
             <li
-              className="border-b py-6"
+              className={style.main__btns}
               onClick={() => handleNavigate("/account")}
             >
               Account
             </li>
           ) : null}
-          <li className="border-b py-6">
+          <li className={style.main__btns}>
             <ThemeToggle />
           </li>
         </ul>
-        <div className="flex flex-col w-full p-4">
+        <div className={style.account__btns}>
           {user?.email ? (
             <>
               <button
-                className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+                className={style.account__sign_in}
                 onClick={handleSignOut}
               >
                 Sign Out
@@ -115,13 +106,13 @@ const Navbar = () => {
           ) : (
             <>
               <button
-                className="w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl"
+                className={style.account__sign_out}
                 onClick={() => handleNavigate("/signin")}
               >
                 Sign In
               </button>
               <button
-                className="w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+                className={style.account__sign_up}
                 onClick={() => handleNavigate("/signup")}
               >
                 Sign Up

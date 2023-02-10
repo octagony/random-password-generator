@@ -1,0 +1,67 @@
+.wrapper {
+  @apply rounded flex items-center justify-between px-4  mt-4 h-20 font-bold;
+}
+
+.logo {
+  @apply cursor-pointer text-3xl;
+}
+
+.theme {
+  @apply hidden md:block;
+}
+
+.email__wrapper {
+  @apply hidden md:flex gap-2;
+}
+
+.email__button {
+  @apply p-4 bg-button rounded-2xl text-btnText px-5 py-2 inline-block cursor-pointer hover:scale-105 transition-all;
+}
+
+.account__wrapper {
+  @apply hidden md:block;
+}
+
+.signin__button {
+  @apply p-4 hover:text-accent cursor-pointer;
+}
+
+.signup__button {
+  @apply bg-button text-btnText px-5 py-2 ml-2 rounded-2xl shadow-lg hover:shadow-2xl cursor-pointer;
+}
+
+.menu__button {
+  @apply block md:hidden cursor-pointer z-10;
+}
+
+.menu__hidden {
+  @apply md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10;
+}
+
+.menu__open {
+  @apply fixed left-[-100%] top-20 h-[90%] flex flex-col items-center justify-between ease-in duration-300;
+}
+
+.menu__wrapper {
+  @apply w-full p-4;
+}
+
+.main__btns {
+  @apply border-b py-6;
+}
+
+.account__btns {
+  @apply flex flex-col w-full p-4;
+}
+
+.account__sign_in {
+  @apply w-full my-3 p-3 bg-button text-btnText rounded-2xl shadow-xl;
+}
+
+.account__sign_out {
+  @apply w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl;
+}
+
+.account__sign_up {
+  @apply w-full my-2 p-3 bg-primary text-primary border-secondary rounded-2xl shadow-xl;
+}

@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../config/firebase.config";
+import style from "./SavedPasswords.module.css";
 
 const SavedPasswords = () => {
   const [passwords, setPasswords] = useState([]);
