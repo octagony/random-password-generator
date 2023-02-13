@@ -1,9 +1,10 @@
 import React from "react";
 import { IRange } from "./Range.props";
+import style from "./Range.module.css";
 
 const Range = ({ passwordLength, handlePasswordLength }: IRange) => {
   return (
-    <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300">
+    <label className={style.wrapper}>
       <input
         type="range"
         name="length"
@@ -13,7 +14,7 @@ const Range = ({ passwordLength, handlePasswordLength }: IRange) => {
         min="10"
         max="80"
         value={passwordLength}
-        className="mb-2 w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+        className={style.input}
       />
     </label>
   );

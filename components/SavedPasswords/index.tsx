@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../config/firebase.config";
+import { IPassword } from "../../types/state";
 import style from "./SavedPasswords.module.css";
 
 const SavedPasswords = () => {
@@ -16,7 +17,7 @@ const SavedPasswords = () => {
   }, [user?.email]);
 
   const passwordsPath = doc(db, "users", `${user?.email}`);
-  const deletePassword = async (passedId) => {
+  const deletePassword = async (passedId: Pick<IPassword, "id">) => {
     const confirm = window.confirm("You Sure?");
     if (confirm) {
       try {
@@ -37,23 +38,21 @@ const SavedPasswords = () => {
       {!passwords?.length ? (
         <p>You don&apos;t have any passwords saved.</p>
       ) : (
-        <div className="grid place-items-center w-full">
+        <div className={style.wrapper}>
           <div>
             {passwords?.map((password) => (
               <div key={password.id}>
-                <div className="flex justify-between items-center my-6 px-2 text-accent">
-                  <div className="text-xl font-bold">{password?.name}</div>
+                <div className={style.password}>
+                  <div className={style.password__name}>{password?.name}</div>
                   <div>
                     <AiOutlineClose
-                      className="cursor-pointer mx-auto"
+                      className={style.icon}
                       onClick={() => deletePassword(password.id)}
                       size={20}
                     />
                   </div>
                 </div>
-                <div className="text-sm w-[300px] sm:w-[400px] md:w-full overflow-x-scroll whitespace-nowrap border-2 rounded-xl py-4 px-2">
-                  {password?.value}
-                </div>
+                <div className={style.password__value}>{password?.value}</div>
               </div>
             ))}
           </div>

@@ -1,18 +1,19 @@
 import React, { SyntheticEvent } from "react";
 import { ICheckbox } from "./Checkbox.props";
+import style from "./Checkbox.module.css";
 
 const Checkbox = ({ updateCheckboxes, name, children }: ICheckbox) => {
   return (
-    <label className="flex radio p-2 cursor-pointer">
+    <label className={style.label}>
       <input
-        className="my-auto transform scale-125"
+        className={style.input}
         name={name}
         type="checkbox"
         onChange={(event: SyntheticEvent) => {
           updateCheckboxes(event);
         }}
       />
-      <div className="title px-2 my-auto">{children}</div>
+      <div className={style.text}>{children}</div>
     </label>
   );
 };

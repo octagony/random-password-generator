@@ -15,9 +15,9 @@ const Account = () => {
     try {
       await logout();
       router.push("/signin");
-      setLoader((prev) => !prev);
     } catch (error) {
       console.log(error.message);
+    } finally {
       setLoader((prev) => !prev);
     }
   };

@@ -1,5 +1,5 @@
 .wrapper {
-  @apply rounded flex items-center justify-between px-4  mt-4 h-20 font-bold;
+  @apply w-full md:w-1/2 mx-auto rounded flex items-center justify-between px-4  mt-4 h-20 font-bold;
 }
 
 .logo {
@@ -7,11 +7,11 @@
 }
 
 .theme {
-  @apply hidden md:block;
+  @apply hidden lg:block;
 }
 
 .email__wrapper {
-  @apply hidden md:flex gap-2;
+  @apply hidden lg:flex gap-2;
 }
 
 .email__button {
@@ -19,7 +19,7 @@
 }
 
 .account__wrapper {
-  @apply hidden md:block;
+  @apply hidden lg:block;
 }
 
 .signin__button {
@@ -31,11 +31,11 @@
 }
 
 .menu__button {
-  @apply block md:hidden cursor-pointer z-10;
+  @apply block lg:hidden cursor-pointer z-10;
 }
 
 .menu__hidden {
-  @apply md:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10;
+  @apply lg:hidden fixed left-0 top-20 flex flex-col items-center justify-between w-full h-[90%] bg-primary ease-in duration-300 z-10;
 }
 
 .menu__open {
@@ -51,7 +51,7 @@
 }
 
 .account__btns {
-  @apply flex flex-col w-full p-4;
+  @apply flex flex-col w-full lg:w-1/2 p-4;
 }
 
 .account__sign_in {

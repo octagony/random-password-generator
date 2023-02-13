@@ -1,24 +1,25 @@
 import React, { useContext } from "react";
 import { HiSun, HiMoon } from "react-icons/hi";
 import { ThemeContext } from "../../context/ThemeContext";
+import style from "./ThemeToggle.module.css";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   return (
-    <div className="p-2">
+    <div className={style.wrapper}>
       {theme === "dark" ? (
         <div
-          className="flex items-center cursor-pointer"
+          className={style.icon__wrapper}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          <HiSun className="text-primary text-2xl mr-2" /> Light Mode
+          <HiSun className={style.icon} /> Light Mode
         </div>
       ) : (
         <div
-          className="flex items-center cursor-pointer"
+          className={style.icon__wrapper}
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-          <HiMoon className="text-primary text-2xl mr-2" /> Dark Mode
+          <HiMoon className={style.icon} /> Dark Mode
         </div>
       )}
     </div>

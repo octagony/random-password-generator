@@ -22,11 +22,11 @@ const Signup = () => {
     try {
       await signup(data.email, data.password);
       await router.push("/");
-      setLoader((prev) => !prev);
     } catch (error) {
       setError(error.message);
-      setLoader((prev) => !prev);
       console.error(error.message);
+    } finally {
+      setLoader((prev) => !prev);
     }
   };
 

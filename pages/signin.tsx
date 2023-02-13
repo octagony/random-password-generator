@@ -28,11 +28,11 @@ const Signin = (): JSX.Element => {
     try {
       await login(data.email, data.password);
       router.push("/account");
-      setLoader((prev) => !prev);
     } catch (error) {
       const errorMessage = displayError(error.message);
-      setLoader((prev) => !prev);
       setError(errorMessage);
+    } finally {
+      setLoader((prev) => !prev);
     }
   };
 

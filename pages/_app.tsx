@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <AuthContextProvider>
-        <ThemeProvider>
+        <ThemeProvider initialTheme="">
           <div className="grid grid-rows-layout min-h-screen">
             <Navbar />
             <Component {...pageProps} />
