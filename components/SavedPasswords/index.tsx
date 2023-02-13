@@ -35,7 +35,7 @@ const SavedPasswords = () => {
   };
 
   return (
-    <div className="relative">
+    <div className={style.wrapper}>
       {!passwords?.length ? (
         <p>You don&apos;t have any passwords saved.</p>
       ) : (
@@ -55,23 +55,23 @@ const SavedPasswords = () => {
                 </div>
                 <div className={style.password__value}>{password?.value}</div>
                 {confirmWindow && (
-                  <div className="absolute h-screen w-screen bg-gray-900 bg-opacity-10 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
-                    <div className="rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 bg-primary text-lg">
-                      <div className="mb-4 text-2xl">Are you sure?</div>
+                  <div className={style.confirm__window}>
+                    <div className={style.confir__inner}>
+                      <div className={style.confir__title}>Are you sure?</div>
                       <span
-                        className="cursor-pointer absolute top-9 right-4"
+                        className={style.confirm__close}
                         onClick={() => setConfirmWindow((prev) => !prev)}
                       >
                         <AiOutlineClose size={20} />
                       </span>
                       <button
-                        className="w-full my-2 p-3  bg-button text-btnText rounded-2xl shadow-xl cursor-pointer mb-4"
+                        className={style.confirm__negative}
                         onClick={() => setConfirmWindow((prev) => !prev)}
                       >
                         Actually, no
                       </button>
                       <button
-                        className="w-full my-2 p-3 bg-primary  rounded-2xl shadow-xl cursor-pointer border text-primary"
+                        className={style.confirm__positive}
                         onClick={() => deletePassword(password.id)}
                       >
                         Yes, i want that
