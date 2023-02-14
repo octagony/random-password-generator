@@ -83,7 +83,10 @@ const SavedPasswords = () => {
                       </button>
                       <button
                         className={style.confirm__positive}
-                        onClick={() => deletePassword(password.id)}
+                        onClick={() => {
+                          deletePassword(password.id);
+                          setConfirmWindow((prev) => !prev);
+                        }}
                       >
                         Yes, i want that
                       </button>
