@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SyntheticEvent } from "react";
+
 import { AiOutlineClose } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
+import { MdContentCopy } from "react-icons/md";
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../config/firebase.config";
 import { IPassword } from "../../types/state";
+import { handleCopyToClipboard } from "../../utils/copyToClipboard";
 import style from "./SavedPasswords.module.css";
 
 const SavedPasswords = () => {
@@ -45,19 +49,26 @@ const SavedPasswords = () => {
               <div key={password.id}>
                 <div className={style.password}>
                   <div className={style.password__name}>{password?.name}</div>
-                  <div>
-                    <AiOutlineClose
+                  <div className={style.icon__wrapper}>
+                    <BsTrash
                       className={style.icon}
                       onClick={() => setConfirmWindow((prev) => !prev)}
                       size={20}
+                    />
+                    <MdContentCopy
+                      className={style.icon}
+                      size={20}
+                      onClick={(event: SyntheticEvent) =>
+                        handleCopyToClipboard(event, password.value)
+                      }
                     />
                   </div>
                 </div>
                 <div className={style.password__value}>{password?.value}</div>
                 {confirmWindow && (
                   <div className={style.confirm__window}>
-                    <div className={style.confir__inner}>
-                      <div className={style.confir__title}>Are you sure?</div>
+                    <div className={style.confirm__inner}>
+                      <div className={style.confirm__title}>Are you sure?</div>
                       <span
                         className={style.confirm__close}
                         onClick={() => setConfirmWindow((prev) => !prev)}

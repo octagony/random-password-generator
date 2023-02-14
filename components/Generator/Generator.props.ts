@@ -8,6 +8,6 @@ export interface IGenerator {
   handlePasswordLength: (event: SyntheticEvent) => void;
   passwordLength: number;
   updateCheckboxes: (event: SyntheticEvent) => void;
-  handleCopyToClipboard: (event: SyntheticEvent) => void;
+  handleCopyToClipboard: (event: SyntheticEvent, password: string) => void;
   setModalSave: React.Dispatch<React.SetStateAction<boolean>>;
 }

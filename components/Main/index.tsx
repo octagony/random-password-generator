@@ -10,6 +10,7 @@ import Generator from "../Generator";
 import Modal from "../Modal";
 import AlertBox from "../AlertBox";
 import { IAlertStatus } from "../AlertBox/AlertBox.props";
+import { handleCopyToClipboard } from "../../utils/copyToClipboard";
 
 const Main = () => {
   const [initialState, setInitialState] = useState<IState>({
@@ -91,17 +92,6 @@ const Main = () => {
       ...password,
       value: getPassword,
     });
-  };
-
-  const handleCopyToClipboard = async (event: SyntheticEvent) => {
-    event.preventDefault();
-    try {
-      await navigator.clipboard.writeText(password.value);
-      alert("Password copied to clipboard!");
-    } catch (e) {
-      console.error(e.name, e.message);
-      alert("Password not copied!");
-    }
   };
 
   return (

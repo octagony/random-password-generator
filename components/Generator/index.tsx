@@ -45,7 +45,9 @@ const Generator = ({
           <div className={styles.action__buttons}>
             <button
               className={styles.action__button}
-              onClick={handleCopyToClipboard}
+              onClick={(event: SyntheticEvent) =>
+                handleCopyToClipboard(event, password.value)
+              }
             >
               Copy to Clipboard
             </button>
