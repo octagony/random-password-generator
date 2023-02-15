@@ -4,11 +4,37 @@ import { useAuth } from "../context/AuthContext";
 import SavedPasswords from "../components/SavedPasswords";
 import Head from "next/head";
 import Loader from "../components/UI/Loader";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../config/firebase.config";
+import { IPassword } from "../types/state";
 
 const Account = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [loader, setLoader] = useState(false);
+  const [savedPasswords, setSavedPasswords] = useState<IPassword[]>([]);
+
+  useEffect(() => {
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
+      setSavedPasswords(doc.data()?.watchList);
+    });
+  }, [user]);
+
+  console.log(savedPasswords);
+
+  const downloadPasswords = () =>{
+    const passwords = savedPasswords.map(item=>(
+      `${item.name} : ${item.value}\n`
+    )).join('')
+    
+ 
+    const link = document.createElement('a');
+    link.setAttribute('href','data:text/plain; charset=utf-8,' + encodeURIComponent(passwords))
+    link.setAttribute('download', 'Easy_Pass.txt');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   const handleSignOut = async () => {
     setLoader((prev) => !prev);
@@ -42,12 +68,18 @@ const Account = () => {
               <p>Welcome, {user?.email}</p>
             </div>
           </div>
-          <div>
+          <div className="flex flex-col gap-4">
             <button
-              className="border px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl"
+              className="border px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-500"
               onClick={handleSignOut}
             >
               Sign Out
+            </button>
+            <button
+              className="border bg-button text-btnText px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-500"
+              onClick={downloadPasswords}
+            >
+              Download passwords
             </button>
           </div>
         </div>
