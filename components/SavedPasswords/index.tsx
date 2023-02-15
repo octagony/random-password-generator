@@ -46,7 +46,7 @@ const SavedPasswords = () => {
         <div className={style.password__wrapper}>
           <div>
             {passwords?.map((password) => (
-              <div key={password.id}>
+              <div className={style.password__inner} key={password.id}>
                 <div className={style.password}>
                   <div className={style.password__name}>{password?.name}</div>
                   <div className={style.icon__wrapper}>

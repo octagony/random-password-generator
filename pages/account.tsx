@@ -59,16 +59,16 @@ const Account = () => {
       <Head>
         <title>Account</title>
       </Head>
-      <div className="max-w-[1140px] mx-auto">
+      <div className="max-w-[1240px] mx-auto">
         {loader && <Loader />}
-        <div className="flex justify-between items-center my-12 py-8 px-4 gap-6 flex-col sm:flex-row sm:gap-12">
+        <div className="flex justify-around items-center mt-2 py-8 px-4 gap-12 flex-col sm:flex-row sm:gap-28">
           <div>
             <h1 className="text-2xl font-bold"> Account </h1>
             <div>
               <p>Welcome, {user?.email}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
             <button
               className="border px-4 py-2 rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-500"
               onClick={handleSignOut}
@@ -84,7 +84,7 @@ const Account = () => {
           </div>
         </div>
         <div>
-          <div className="flex justify-between items-center my-12 py-8">
+          <div className="flex justify-between items-center mt-2 py-8">
             <div className="w-full min-h-[300px] px-4 text-center">
               <h2 className="text-2xl font-bold py-4">Saved Passwords</h2>
               <SavedPasswords />
