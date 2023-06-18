@@ -1,0 +1,11 @@
+.label {
+  @apply flex p-2 cursor-pointer;
+}
+
+.input {
+  @apply my-auto transform scale-125;
+}
+
+.text {
+  @apply px-2 my-auto;
+}

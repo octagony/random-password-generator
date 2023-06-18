@@ -10,6 +10,9 @@
   @apply border border-secondary rounded-2xl shadow-xl bg-primary max-w-[1140px] w-full mx-auto;
 }
 
+body {
+  @apply bg-primary dark:bg-primary transition-colors duration-500;
+}
 
 .dark {
   --color-bg-primary: #101216;

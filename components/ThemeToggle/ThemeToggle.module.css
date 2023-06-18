@@ -1,0 +1,11 @@
+.wrapper {
+  @apply p-2;
+}
+
+.icon__wrapper {
+  @apply flex items-center cursor-pointer;
+}
+
+.icon {
+  @apply text-primary text-2xl mr-2;
+}
