@@ -1,44 +1,43 @@
-.wrapper{
-    @apply absolute w-screen h-screen bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+.wrapper {
+	@apply absolute w-full h-full bg-gray-900 bg-opacity-20 z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%];
 }
 
-.box{
-    @apply rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+.box {
+	@apply rounded-xl fixed border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-.inner{
-    @apply w-max md:w-96 h-96 bg-primary rounded-xl
+.inner {
+	@apply w-max md:w-96 h-96 bg-primary rounded-xl;
 }
 
-.inner__name{
-    @apply p-4
+.inner__name {
+	@apply p-4;
 }
 
-.inner__title{
-    @apply text-xl cursor-pointer
+.inner__title {
+	@apply text-xl cursor-pointer;
 }
 
-.inner__close{
-    @apply cursor-pointer absolute top-5 right-4
+.inner__close {
+	@apply cursor-pointer absolute top-5 right-4;
 }
 
-.inner__wrapper{
-    @apply px-4 mb-10
+.inner__wrapper {
+	@apply px-4 mb-10;
 }
 
-.inner__label{
-    @apply block tracking-wide text-primary font-bold mb-2
+.inner__label {
+	@apply block tracking-wide text-primary font-bold mb-2;
 }
 
-.inner__input{
-      @apply block w-full border-2 border-accent rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-secondary
+.inner__input {
+	@apply block w-full border-2 border-accent rounded py-3 px-4 mb-3 leading-tight focus:outline-none bg-secondary;
 }
 
-.inner__save{
-    @apply px-4
+.inner__save {
+	@apply px-4;
 }
 
-.inner__btn{
-    @apply w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl cursor-pointer
+.inner__btn {
+	@apply w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl cursor-pointer;
 }
-
